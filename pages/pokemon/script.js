@@ -1,8 +1,25 @@
 let procura = new URLSearchParams(location.search)
-document.title = "Página do " + procura.get("name")
+var nomePokemon = procura.get("name")
+document.title = "Página do " + nomePokemon
 
-const body = document.getElementById("body")
-let pokeImage = fetch('https://pokeapi.co/api/v2/pokemon/' + procura.get("name"))
-let criaImage = document.createElement('img')
-criaImage.src = (pokeImage + "sprites.front_default")
-body.appendChild(criaImage)
+async function ImagemPokemon()
+{
+    try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + nomePokemon)
+
+        const data = await response.json()
+        const url = data.sprites.front_default
+
+        let leImagem = document.getElementById('pokemonImagem')
+        leImagem.src = url
+        leImagem.alt = nomePokemon
+
+        let leInformacoes = document.getElementById('informacoes')
+        leInformacoes.innerHTML = "Informações sobre " + nomePokemon
+        leImagem
+    } catch (e) {
+        console.error('Erro ao buscar informações do Pokémon:', e);
+    }
+}
+
+ImagemPokemon()
