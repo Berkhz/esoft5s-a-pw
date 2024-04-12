@@ -1,9 +1,11 @@
 let procura = new URLSearchParams(location.search)
 var nomePokemon = procura.get("name")
-document.title = "Página do " + nomePokemon
 
-async function ImagemPokemon()
-{
+function AlteraTitulo() {
+    document.title = "Página do " + nomePokemon
+}
+
+async function ImagemPokemon() {
     try {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + nomePokemon)
 
@@ -16,10 +18,10 @@ async function ImagemPokemon()
 
         let leInformacoes = document.getElementById('informacoes')
         leInformacoes.innerHTML = "Informações sobre " + nomePokemon
-        leImagem
     } catch (e) {
         console.error('Erro ao buscar informações do Pokémon:', e);
     }
 }
 
+AlteraTitulo()
 ImagemPokemon()
