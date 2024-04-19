@@ -2,7 +2,6 @@
 async function QuantidadeVisitas() {
     let contador = 1
     let ultimaData = new Date()
-    let recarregouPagina = document.lastModified
 
     if (localStorage !== null) {
         let visitaObject = { count: contador, data: ultimaData}
@@ -23,7 +22,6 @@ async function QuantidadeVisitas() {
    
         let qtdVisitas = document.getElementById('qtdAcessos')
         let contadorVisita = JSON.parse(localStorage.getItem('contador')).count
-        let dataVisita = JSON.parse(localStorage.getItem('ultimaData')).data
         qtdVisitas.innerHTML = "Está página foi visitada: " + contadorVisita + 
         " vezes. A Última visita foi: " + dataTratada.format(ultimaData)
     }
