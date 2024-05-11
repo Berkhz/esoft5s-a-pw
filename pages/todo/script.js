@@ -4,12 +4,14 @@ function enviar(e) {
     const form = e.target;
     const formData = new FormData(form);
 
-    const meuStorage = localStorage
+    const tarefa = {
+        titulo: formData.get('tituloTarefa'),
+        descricao: formData.get('descricaoTarefa')
+    };
 
-    meuStorage.setItem('tituloTarefa', formData.get('tituloTarefa'))
-    meuStorage.setItem('descricaoTarefa', formData.get('descricaoTarefa'))
+    const tarefaJSON = JSON.stringify(tarefa);
+    localStorage.setItem('tarefa', tarefaJSON);
 
-    console.log(formData.get('tituloTarefa'))
-    console.log(formData.get('descricaoTarefa'))
-    alert('Mensagem enviada com sucesso!')
+    form.reset();
+    console.log(tarefa);
 }
