@@ -1,17 +1,37 @@
-function enviar(e) {
-    e.preventDefault()
+const taskKey = '@tasks'
 
-    const form = e.target;
-    const formData = new FormData(form);
+function addTask(event) {
+  event.preventDefault() 
+  const taskId = new Date().getTime()
+  const taskList = document.querySelector('#taskList')
 
-    const tarefa = {
-        titulo: formData.get('tituloTarefa'),
-        descricao: formData.get('descricaoTarefa')
-    };
+  const form = document.querySelector('#taskForm')
+  const formData = new FormData(form)
 
-    const tarefaJSON = JSON.stringify(tarefa);
-    localStorage.setItem('tarefa', tarefaJSON);
+  const taskTitle = formData.get('title')
+  const taskDescription = formData.get('description')
 
-    form.reset();
-    console.log(tarefa);
+  const li = document.createElement('li')
+
+  li.id = taskId
+  li.innerHTML = `
+      <h2>${taskTitle}</h2>
+      <p>${taskDescription}</p>
+  `
+
+  taskList.appendChild(li)
+
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || []
+  tasks.push({ title: taskTitle, description: taskDescription })
+  localStorage.setItem(taskKey, JSON.stringify(tasks))
+
+  form.reset()
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || []
+  const taskList = document.querySelector('#taskList')
+  taskList.innerHTML = tasks
+    .map((task) => `<li><h2>${task.title}</h2><p>${task.description}</p></li>`)
+    .join('')
+})
