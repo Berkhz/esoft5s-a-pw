@@ -32,6 +32,17 @@
       </main>
       <footer>&copy; 2024 Todo List</footer>
     </div>
+    
+    <dialog id="editDialog">
+      <form method="dialog">
+        <input type="text" id="editTitle" name="title" required placeholder="Informe o título da tarefa" />
+        <textarea id="editDescription" name="description" required placeholder="Informe a descrição da tarefa"></textarea>
+        <menu>
+          <button type="submit">Editar</button>
+          <button type="reset" onclick="document.getElementById('editDialog').close()">Cancelar</button>
+        </menu>
+      </form>
+    </dialog>
     <script src="./script.js"></script>
   </body>
 </html>
