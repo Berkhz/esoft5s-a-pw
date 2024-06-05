@@ -17,7 +17,8 @@ function addTask(event) {
       <h2>${taskTitle}</h2>
       <p>${taskDescription}</p>
       <button class="edit-btn" title="Editar tarefa" onclick="openEditDialog(${taskId})">✏️</button>
-  `;
+      <button class="exclude-btn" title="Excluir tarefa" onclick="excludeTask(${taskId})">✏️</button>
+      `;
 
   taskList.appendChild(li);
 
@@ -51,6 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <h2>${task.title}</h2>
         <p>${task.description}</p>
         <button class="edit-btn" title="Editar tarefa" onclick="openEditDialog(${task.id})">✏️</button>
+        <button class="exclude-btn" title="Excluir tarefa" onclick="excludeTask(${task.id})">❌</button>
       </li>`)
     .join('');
 });
