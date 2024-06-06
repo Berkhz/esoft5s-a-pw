@@ -40,13 +40,36 @@ function openEditDialog(taskId) {
   editTitle.value = task.title;
   editDescription.value = task.description;
 
+  editDialog.dataset.taskId = taskId;
   editDialog.showModal();
+}
+
+function saveEdit(event) {
+  event.preventDefault();
+  const editDialog = document.getElementById('editDialog');
+  const taskId = parseInt(editDialog.dataset.taskId);
+
+  const tasks = JSON.parse(localStorage.getItem(taskKey));
+  const taskIndex = tasks.findIndex(t => t.id === taskId);
+
+  tasks[taskIndex].title = document.getElementById('editTitle').value;
+  tasks[taskIndex].description = document.getElementById('editDescription').value;
+  localStorage.setItem(taskKey, JSON.stringify(tasks));
+
+  const li = document.getElementById(taskId);
+  li.querySelector('h2').textContent = tasks[taskIndex].title;
+  li.querySelector('p').textContent = tasks[taskIndex].description;
+
+  editDialog.close();
 }
 
 function excludeTask(taskId) {
   const tasks = JSON.parse(localStorage.getItem(taskKey));
-  const updatedTasks = tasks.filter(t => t.id!== taskId);
+  const updatedTasks = tasks.filter(t => t.id !== taskId);
   localStorage.setItem(taskKey, JSON.stringify(updatedTasks));
+
+  const li = document.getElementById(taskId);
+  li.remove();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -62,3 +85,5 @@ window.addEventListener('DOMContentLoaded', () => {
       </li>`)
     .join('');
 });
+
+document.getElementById('editDialog').addEventListener('submit', saveEdit);
