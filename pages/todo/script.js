@@ -17,7 +17,7 @@ function addTask(event) {
       <h2>${taskTitle}</h2>
       <p>${taskDescription}</p>
       <button class="edit-btn" title="Editar tarefa" onclick="openEditDialog(${taskId})">✏️</button>
-      <button class="exclude-btn" title="Excluir tarefa" onclick="excludeTask(${taskId})">✏️</button>
+      <button class="exclude-btn" title="Excluir tarefa" onclick="excludeTask(${taskId})">❌</button>
       `;
 
   taskList.appendChild(li);
@@ -41,6 +41,12 @@ function openEditDialog(taskId) {
   editDescription.value = task.description;
 
   editDialog.showModal();
+}
+
+function excludeTask(taskId) {
+  const tasks = JSON.parse(localStorage.getItem(taskKey));
+  const updatedTasks = tasks.filter(t => t.id!== taskId);
+  localStorage.setItem(taskKey, JSON.stringify(updatedTasks));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
