@@ -138,3 +138,26 @@ menu button {
   padding: 8px 16px;
   cursor: pointer;
 }
+
+#filterForm {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 20px auto;
+  width: 40ch;
+  justify-content: center;
+}
+
+#filterTitle {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+#filterForm button {
+  background-color: #0074d9;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
